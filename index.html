@@ -39,7 +39,7 @@
           <div class="card-body" id="timer-value">Time Remaining: </div>
         </div>
       </div>
-      <div class="row card shadow p-3 mb-5 bg-body rounded">
+      <div class="col-12 row card shadow p-3 mb-5 bg-body rounded">
           <div id="qaDiv">
               <div class="card-title h3">
                   <p id="question-text">Question text Lorem ipsum dolor sit amet consectetur?</p>
@@ -54,11 +54,22 @@
         </div>
     </div>
 
-    <!-- if correct button is NOT clicked then subtract time and display incorrect -->
-    <!-- if correct button IS clicked award points and display correct -->
-    <!-- if ANY button is clicked move to next question -->
-
-    <!-- repeat through all questions -->
+    <div class="container" id="results-container">
+      <div class="row">
+        <div class="col-12">
+          <h3>You have finished the quiz!</h3>
+          <h4 id="final-score">Your final score is: </h4>
+        </div>
+        <div class="col-12">
+          <p>Enter your initials here to save your high score!</p>
+          <form action="" id="userInput">
+            <label for="initials">Initials</label><br>
+            <input type="text" id="userInitials"><br><br>
+            <input type="submit" value="Submit" class="col-auto p-2 m-3 btn btn-success" id="submit-score">
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- game ends IF timer runs out -->
     <!-- game ends if there are no more questions -->

@@ -1,6 +1,7 @@
 // hide questions content before quiz begins
 window.onload = function () {
     document.getElementById("main-container").style.display = "none";
+    document.getElementById("results-container").style.display = "none";
 }
 
 // timer variable
@@ -122,5 +123,13 @@ var verifyAnswer = function () {
 
 var endQuiz = function() {
     document.getElementById("main-container").style.display = "none";
-    
+    document.getElementById("results-container").style.display = "block"
+    document.getElementById("final-score").textContent = "Your final score is: " + score;   
 }
+
+var submitScoreBtn = document.getElementById("submit-score");
+
+submitScoreBtn.onclick = (function(){
+    var userInitials = document.getElementById("userInitials").value;
+    localStorage.setItem(userInitials, score);
+})
