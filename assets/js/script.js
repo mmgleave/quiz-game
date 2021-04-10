@@ -3,6 +3,20 @@ window.onload = function () {
     document.getElementById("main-container").style.display = "none";
 }
 
+// timer variable
+var counter = 100;
+var countdown = function (){
+    timer.textContent = "Time Remaining: " + counter;
+    counter--;
+        if(counter === 0){
+            console.log("timer end");
+            clearInterval(startCountdown);
+        };
+};
+
+
+var timer = document.getElementById("timer-value");
+
 // questions array
 var questionsArray = [
     {
@@ -39,7 +53,10 @@ var questionsArray = [
 
 
 $("#btn-start").on('click', function () {
+    document.getElementById("btn-start").style.display = "none";
+    document.getElementById("start-p").style.display = "none";
     quizBegin();
+    var startCountdown = setInterval(countdown, 1000);
 });
 
 
@@ -80,11 +97,12 @@ var verifyAnswer = function () {
             console.log("CORRECT");
             currentQ++;
             score++;
-            $("#score-value").text(score);
+            $("#score-value").text("Current Score: " + score);
         } else {
             currentQ++;
+            counter = counter - 10;
             console.log("INCORRECT");
-            $("#score-value").text(score);
+            $("#score-value").text("Current Score: " + score);
         }
         selectedAnswer = "";
 
@@ -104,4 +122,5 @@ var verifyAnswer = function () {
 
 var endQuiz = function() {
     document.getElementById("main-container").style.display = "none";
+    
 }

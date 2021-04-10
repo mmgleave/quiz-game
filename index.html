@@ -18,9 +18,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Restart</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="high-scores.html">High Scores</a>
                 </li>
               </ul>
@@ -28,39 +25,32 @@
           </div>
         </nav>
   </header>
-  <div class="container">
-    <div class="row">
-      <div class="col-6 card">
-        <div class="card-title">Current Score</div>
-        <div class="card-body" id="score-value"></div>
-      </div>
-      <div class="col-6 card">
-        <div class="card-title">Time Remaining</div>
-        <div class="card-body" id="timer-value"></div>
-      </div>
-    </div>
-    <button class="btn btn-dark" id="btn-start">Start</button>
+  <div class="p-5">
+    <p id="start-p">Click this button to start the quiz! The timer will start immediately so make sure you are ready!</p>
+    <button class="btn btn-success" id="btn-start">Start</button>
   </div>
 
     <div class="container" id="main-container">
-        <div class="row">
-            <div class="col-6 card" id="qaDiv">
-                <div class="card-title">
-                    <p id="question-text">Question text Lorem ipsum dolor sit amet consectetur?</p>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-light answer-btn" id="btn-ans1">Answer 1</button>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-light answer-btn" id="btn-ans2">Answer 2</button>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-light answer-btn" id="btn-ans3">Answer 3</button>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-light answer-btn" id="btn-ans4">Answer 4</button>
-            </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="card-body" id="score-value">Current Score: </div>
+        </div>
+        <div class="col-6" id="time-card">
+          <div class="card-body" id="timer-value">Time Remaining: </div>
+        </div>
+      </div>
+      <div class="row card shadow p-3 mb-5 bg-body rounded">
+          <div id="qaDiv">
+              <div class="card-title h3">
+                  <p id="question-text">Question text Lorem ipsum dolor sit amet consectetur?</p>
+              </div>
+          </div>
+          <div class="col" >
+              <button class="col-6 m-2 btn btn-primary answer-btn" id="btn-ans1">Answer 1</button></br>
+              <button class="col-6 m-2 btn btn-primary answer-btn" id="btn-ans3">Answer 3</button></br>
+              <button class="col-6 m-2 btn btn-primary answer-btn" id="btn-ans4">Answer 4</button></br>
+              <button class="col-6 m-2 btn btn-primary answer-btn" id="btn-ans2">Answer 2</button></br>
+          </div>
         </div>
     </div>
 
