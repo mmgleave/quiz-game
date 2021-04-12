@@ -1,22 +1,24 @@
-// hide questions content before quiz begins
-window.onload = function () {
-    document.getElementById("main-container").style.display = "none";
-    document.getElementById("results-container").style.display = "none";
-}
+// container variables
+var mainContainer = document.getElementById("main-container");
+var resultsContainer = document.getElementById("results-container");
+var highScoresContainer = document.getElementById("high-scores-container");
+var startContainer = document.getElementById("start-container");
 
 // timer variable
-var counter = 100;
-var countdown = function (){
-    timer.textContent = "Time Remaining: " + counter;
-    counter--;
-        if(counter === 0){
-            console.log("timer end");
-            clearInterval(startCountdown);
-        };
-};
-
-
 var timer = document.getElementById("timer-value");
+var counter = 100;
+
+// score variable
+var score = 0;
+
+// current question variable
+var currentQ = 0;
+
+// current key-id
+var currentKeyId = 0;
+
+// selected answer variable
+var selectedAnswer = "";
 
 // questions array
 var questionsArray = [
@@ -52,60 +54,74 @@ var questionsArray = [
     }
 ];
 
+// hide content before quiz begins
+window.onload = function () {
+    mainContainer.style.display = "none";
+    resultsContainer.style.display = "none";
+    highScoresContainer.style.display = "none";
+};
 
-$("#btn-start").on('click', function () {
-    document.getElementById("btn-start").style.display = "none";
-    document.getElementById("start-p").style.display = "none";
-    quizBegin();
+var quizTimerStart = function(){
+    var countdown = function (){
+        timer.textContent = "Time Remaining: " + counter;
+        counter--;
+    };
     var startCountdown = setInterval(countdown, 1000);
+        if(counter === 0){
+            console.log("timer end");
+            clearInterval(startCountdown);
+        };
+  
+}
+
+// start button event listener to hide start content, begin quiz, start countdown
+$("#btn-start").on('click', function () {
+    startContainer.style.display = "none";
+    quizBegin();
+    quizTimerStart();
 });
 
 
-// score variable
-var score = 0;
-
-var currentQ = 0;
-
-var selectedAnswer = "";
-console.log(selectedAnswer);
-
 // main quiz function (when start button is clicked)
 var quizBegin = function () {
+    // set current question to 0
+    currentQ = 0;
 
-    for (i = 0; i < questionsArray.length; i++) {
-        // display question main-container
-        document.getElementById("main-container").style.display = "block";
+    // set current score display to 0
+    score = 0;
+    $("#score-value").text("Current Score: " + 0);
 
-        // display question 
-        $("#question-text").text(questionsArray[currentQ].q);
+    // display question main-container
+    document.getElementById("main-container").style.display = "block";
 
-        $("#btn-ans1").text(questionsArray[currentQ].a.a);
-        $("#btn-ans2").text(questionsArray[currentQ].a.b);
-        $("#btn-ans3").text(questionsArray[currentQ].a.c);
-        $("#btn-ans4").text(questionsArray[currentQ].a.d);
-    };
+    // display question 
+    $("#question-text").text(questionsArray[currentQ].q);
+
+    $("#btn-ans1").text(questionsArray[currentQ].a.a);
+    $("#btn-ans2").text(questionsArray[currentQ].a.b);
+    $("#btn-ans3").text(questionsArray[currentQ].a.c);
+    $("#btn-ans4").text(questionsArray[currentQ].a.d);
     
+    // verify answer function
     verifyAnswer();
 };
 
+// verify answer function to compare selected ansewr with correct
 var verifyAnswer = function () {
     // selected answer
     $(".answer-btn").on("click", function () {
         selectedAnswer = $(this).text();
-        console.log(selectedAnswer);
-        console.log(questionsArray[currentQ].a.correct);
         if (selectedAnswer === questionsArray[currentQ].a.correct) {
-            console.log("CORRECT");
             currentQ++;
             score++;
             $("#score-value").text("Current Score: " + score);
         } else {
             currentQ++;
             counter = counter - 10;
-            console.log("INCORRECT");
             $("#score-value").text("Current Score: " + score);
         }
         selectedAnswer = "";
+        console.log(currentQ);
 
         if(currentQ < questionsArray.length) {
         // display question 
@@ -121,15 +137,44 @@ var verifyAnswer = function () {
     });
 };
 
+// end quiz function (hide main, show results and final score)
 var endQuiz = function() {
-    document.getElementById("main-container").style.display = "none";
-    document.getElementById("results-container").style.display = "block"
-    document.getElementById("final-score").textContent = "Your final score is: " + score;   
-}
+    mainContainer.style.display = "none";
+    resultsContainer.style.display = "block"
+    document.getElementById("final-score").textContent = "Your final score is: " + score;
+};
 
+// high scores variables
 var submitScoreBtn = document.getElementById("submit-score");
+var highScoresList = document.getElementById("high-scores-list");
 
+
+// submit score button event listener
 submitScoreBtn.onclick = (function(){
-    var userInitials = document.getElementById("userInitials").value;
-    localStorage.setItem(userInitials, score);
-})
+    addScore();
+    showHighScores();
+});
+
+// function to hide all other content and show high scores
+var showHighScores = function (){
+    startContainer.style.display = "none"
+    mainContainer.style.display = "none";
+    resultsContainer.style.display = "none";
+    highScoresContainer.style.display = "block";
+};
+
+// add p element to high scores page
+var addScore = function(){
+    var newUserResults = document.createElement("p");
+    newUserResults.textContent = "Initials: " + document.getElementById("user-initials").value + " | Score: " + score;
+    highScoresList.appendChild(newUserResults);
+    localStorage.setItem(currentKeyId, newUserResults.textContent);
+    currentKeyId++;  
+};
+
+// high scores click event listener
+var highScoresLink = document.getElementById("high-scores-link");
+
+highScoresLink.onclick = function(){
+    showHighScores();
+};
