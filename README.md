@@ -8,7 +8,7 @@ A basic JavaScript quiz which keeps score and displays a countdown timer. When q
 
 ## Screenshots
 
-![Image-1](assets/images/quiz-game-screenshot)
+![Image-1](assets/images/quiz-game-screenshot.png)
 
 ## Contribution
 Made with ❤️ by Michelle Gleave
