@@ -20,36 +20,106 @@ var currentKeyId = 0;
 // selected answer variable
 var selectedAnswer = "";
 
-// questions array
+// questions array (content found on https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS)
 var questionsArray = [
     {
-        q: "What is my favorite color?",
+        q: "Inside which HTML element do we put the JavaScript?",
         a: {
-            a: "Red",
-            b: "Green",
-            c: "Blue",
-            d: "Gray",
-            correct: "Gray"
+            a: "<javascript>",
+            b: "<scripting>",
+            c: "<script>",
+            d: "<js>",
+            correct: "<script>"
         },
     },
     {
-        q: "What is my favorite movie?",
+        q: "What is the correct JavaScript syntax to change the content of the HTML element with an id of 'demo'?'",
         a: {
-            a: "In Bruges",
-            b: "Pretty Woman",
-            c: "The Mighty Ducks",
-            d: "Star Trek",
-            correct: "In Bruges"
+            a: "document.getElement('p').innerHTML = 'Hello'",
+            b: "#demo.innerHTML = 'Hello'",
+            c: "document.getElementById('demo').innerHTML = 'Hello'",
+            d: "document.getElementByName('p').innerHTML = 'Hello'",
+            correct: "document.getElementById('demo').innerHTML = 'Hello'"
         }
     },
     {
-        q: "What is my favorite food?",
+        q: "Where is the correct place to insert a JavaScript?",
         a: {
-            a: "Pizza",
-            b: "B",
-            c: "C",
-            d: "D",
-            correct: "Pizza"
+            a: "It doesn't matter.",
+            b: "The <body> section",
+            c: "The <head> section",
+            d: "None of these are correct",
+            correct: "The <body> section"
+        }
+    },
+    {
+        q: "What is the correct syntax for referring to an external script called 'script.js'?",
+        a: {
+            a: "<script name='./script.js'>",
+            b: "<script href='./script.js'>",
+            c: "<script src='./script.js'>",
+            d: "<script src='./script.js'>",
+            correct: ""
+        }
+    },
+    {
+        q: "How do you write 'Hello World' in an alert box?",
+        a: {
+            a: "msg('Hello World')",
+            b: "alert('Hello World')",
+            c: "alertBox('Hello World')>",
+            d: "msgBox('Hello World')",
+            correct: "alert('Hello World')"
+        }
+    },
+    {
+        q: "How do you create a function in JavaScript?",
+        a: {
+            a: "function:myFunction()",
+            b: "function = myFunction()",
+            c: "function myFunction()",
+            d: "function(myFunction)",
+            correct: "function = myFunction()"
+        }
+    },
+    {
+        q: "How do you call a function named 'myFunction'?",
+        a: {
+            a: "myFunction()",
+            b: "call myFunction()",
+            c: "call function = myFunction()",
+            d: "call:myFunction()",
+            correct: "fmyFunction()"
+        }
+    },
+    {
+        q: "How do you write an IF statement in Javacript?",
+        a: {
+            a: "if i = 5",
+            b: "if i = 5 then",
+            c: "if (i === 5) then",
+            d: "if (i === 5)",
+            correct: "if (i === 5)"
+        }
+    },
+    {
+        q: "What is the correct syntax to use for an OR inside an if statement?",
+        a: {
+            a: "OR",
+            b: "**",
+            c: "&&",
+            d: "||",
+            correct: "||"
+        }
+    },
+    {
+        q: "How does a FOR loop start?",
+        a: {
+            a: "for i = 1 to 5",
+            b: "for (i = 0; i <= 5, i++)",
+            c: "for (i = 0, i <= 5)",
+            d: "for (i <= 5, i++",
+            correct: "for (i = 0; i <= 5, i++)"
         }
     }
 ];
@@ -65,13 +135,13 @@ var quizTimerStart = function(){
     var countdown = function (){
         timer.textContent = "Time Remaining: " + counter;
         counter--;
-    };
-    var startCountdown = setInterval(countdown, 1000);
         if(counter === 0){
             console.log("timer end");
             clearInterval(startCountdown);
+            endQuiz();
         };
-  
+    };
+    var startCountdown = setInterval(countdown, 1000);
 }
 
 // start button event listener to hide start content, begin quiz, start countdown
